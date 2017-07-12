@@ -18,7 +18,6 @@ import {
 } from 'react-native-swRefresh'
 //import { SwipeListView, SwipeRow } from 'react-native-swipe-list-view';
 const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-var isPage = false;
 var commonUtil = require('./common');
 import { connect } from 'react-redux';
 import  * as HomeTwoActions from './actions/HomeTwoActions'
@@ -30,7 +29,7 @@ class HomeTwo extends Component {
     }
 
     componentDidMount() {
-            isPage = false;
+
         console.log('页面加载完毕');
             this.refs.listView.beginRefresh();
     }
