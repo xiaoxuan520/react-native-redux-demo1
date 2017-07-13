@@ -4,8 +4,11 @@ import  {
 } from 'react-native'
 import * as HOMETWOACTIONTYPES from './HomeTwoActionTypes';
 import * as Api from '../Api'
+import { createAction } from 'redux-actions';
 var DataUtil  = require('../DataUtil');
 
+/*
+//第一种写法
 //获取推送消息数据
 export function getPushMessageList(page,callback){
     return (dispatch) => {
@@ -32,6 +35,24 @@ export function getPushMessageList(page,callback){
         });
     }
 }
+*/
+
+
+////第二种写法
+export const getPushMessageList = createAction(
+    HOMETWOACTIONTYPES.GETPUSHMESSAGELIST_SUCCESS,
+    (page,callback) =>{
+        if (page == 0){
+            DataUtil.dataArray = [];
+        }
+        let url = Api.ApiUtil.GetPushMessageList + '?userId=94&userType=1&page=' + page;
+        console.log(url);
+       return fetch(url)
+            .then((response) => response.text())
+            .then(callback(true));
+    }
+);
+
 
 //开始刷新
 export function refreshDoing(){

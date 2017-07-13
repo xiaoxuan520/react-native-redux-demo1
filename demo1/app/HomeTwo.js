@@ -29,10 +29,10 @@ class HomeTwo extends Component {
     }
 
     componentDidMount() {
-
         console.log('页面加载完毕');
-            this.refs.listView.beginRefresh();
+        this.refs.listView.beginRefresh();
     }
+
 
     //显示图片的
     renderImageItemUI(imageList) {
@@ -124,15 +124,14 @@ class HomeTwo extends Component {
     _onListRefersh(end) {
         console.log('推送消息下拉刷新');
         var thiz = this;
-        this.props.getPushMessageList(0,function(isBool){
-            let timer = setTimeout(()=> {
-                clearTimeout(timer);
-                if (thiz.refs.listView){
-                    thiz.refs.listView.resetStatus(); //重置上拉加载的状态
-                    end();//刷新成功后需要调用end结束刷新
-                }
-            }, 800);
-
+        this.props.getPushMessageList(0,function(){
+                    let timer = setTimeout(()=> {
+                        clearTimeout(timer);
+                        if (thiz.refs.listView){
+                            thiz.refs.listView.resetStatus(); //重置上拉加载的状态
+                             end();
+                        }
+                    }, 800);
         });
 
     }
@@ -142,13 +141,13 @@ class HomeTwo extends Component {
     _onLoadMore(end){
         console.log('推送消息上拉刷新');
             var thiz = this;
-            this.props.getPushMessageList(this.props.dataState.page,function(isBool){
+            this.props.getPushMessageList(this.props.dataState.page,function(){
                 let timer = setTimeout(()=> {
                     clearTimeout(timer);
                     end(thiz.props.dataState.page >= thiz.props.dataState.pageSum)
                 }, 1000);
-
             });
+
 
     }
 

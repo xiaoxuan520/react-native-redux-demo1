@@ -5,7 +5,8 @@ var DataUtil  = require('../DataUtil');
 const initialState = {
     dataList:[],
     page:0,
-    pageSum:-1
+    pageSum:-1,
+    status:null
 };
 export default function HomeTwoReducer (state=initialState,action){
     switch (action.type){
@@ -14,21 +15,26 @@ export default function HomeTwoReducer (state=initialState,action){
                 ...state
             };
         case HomeTwoActionTypes.GETPUSHMESSAGELIST_SUCCESS:
-           var array = DataUtil.dataArray.concat(action.data.list);
+            //console.log('数据',JSON.parse(action.payload));
+            var responseData = JSON.parse(action.payload);
+           var array = DataUtil.dataArray.concat(responseData.values.list);
             DataUtil.dataArray = array;
             return {
                 ...state,
                 dataList:array,
-                page:action.data.page,
-                pageSum:action.data.pageSum
+                page:responseData.values.page,
+                pageSum:responseData.values.pageSum,
+                status:true
             };
         case HomeTwoActionTypes.GETPUSHMESSAGELIST_FAIL:
             return {
-                ...state
+                ...state,
+                status:true
             };
         case HomeTwoActionTypes.GETPUSHMESSAGELIST_ERROR:
             return {
-                ...state
+                ...state,
+                status:true
             };
         default:
             return state

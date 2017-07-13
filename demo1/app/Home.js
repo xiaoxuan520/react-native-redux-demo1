@@ -49,10 +49,8 @@ function mapDispatchToProps(dispatch){
 }
 
 function select(store){
-    console.log('请求下来的数据',store);
     return {
-        //pageText:store.reducer.pageText,
-        pageText:store.reducer.pageText
+        pageText:store.reducer.pageText,
     }
 }
 
