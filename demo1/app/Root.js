@@ -6,9 +6,10 @@ import { Provider } from 'react-redux';
 import Navigator from './Navigator'
 import thunk from 'redux-thunk';
 
-import reducers from './reducers/index';
+import * as reducers from './reducers';
 const createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
-const store = createStoreWithMiddleware(reducers);
+const rootReducer = combineReducers(reducers);
+const store = createStoreWithMiddleware(rootReducer);
 class Root extends Component {
     render(){
         return (

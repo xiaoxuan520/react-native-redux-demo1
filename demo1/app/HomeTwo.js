@@ -167,7 +167,6 @@ class HomeTwo extends Component {
     }
 
     renderNoPushMessageDataUI(){
-        const {dataState} = this.props;
         //console.log('请求下来的数据',dataState);
         return (
             <View style={PushMessageContainStyle.containstyle}>
