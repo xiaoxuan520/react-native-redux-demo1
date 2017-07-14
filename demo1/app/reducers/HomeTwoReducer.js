@@ -15,16 +15,18 @@ export default function HomeTwoReducer (state=initialState,action){
                 ...state
             };
         case HomeTwoActionTypes.GETPUSHMESSAGELIST_SUCCESS:
-            //console.log('数据',JSON.parse(action.payload));
-            var responseData = JSON.parse(action.payload);
-           var array = DataUtil.dataArray.concat(responseData.values.list);
+            var responseData = action.payload;
+           var array = DataUtil.dataArray.concat(responseData.list);
             DataUtil.dataArray = array;
             return {
                 ...state,
                 dataList:array,
-                page:responseData.values.page,
-                pageSum:responseData.values.pageSum,
+                page:responseData.page,
+                pageSum:responseData.pageSum,
                 status:true
+            };
+            return {
+                ...state
             };
         case HomeTwoActionTypes.GETPUSHMESSAGELIST_FAIL:
             return {
